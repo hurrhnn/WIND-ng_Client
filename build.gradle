@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+
+}
+
+mainClassName = "Main"
+
+group 'xyz.hurrhnn'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.5.1'
+    implementation group: 'org.json', name: 'json', version: '20201115'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+}
