@@ -1,6 +1,7 @@
 import client.UpdateClientUI;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
+import org.json.JSONObject;
 
 import java.util.Scanner;
 
@@ -56,10 +57,11 @@ public class SendProtocolMessageThread extends Thread {
                         "    \"payload\": {\n" +
                         "        \"type\": \"send\",\n" +
                         "        \"chat_id\": " + windWebSocketClient.currentVBox + ",\n" +
-                        "        \"content\": \"" + textArea.getText().substring(0, textArea.getText().length() - 1).replace("\n", "\\n") + "\"\n" +
                         "    }\n" +
                         "}";
-                windWebSocketClient.send(rawPayload);
+                JSONObject jsonObject = new JSONObject(rawPayload);
+                jsonObject.getJSONObject("payload").accumulate("content", textArea.getText().substring(0, textArea.getText().length() - 1));
+                windWebSocketClient.send(jsonObject.toString());
                 textArea.setText("");
             }
         });
