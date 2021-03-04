@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea id="textarea_input_text" layoutX="200.0" prefHeight="50.0" prefWidth="1080.0" promptText="Input Text..." style="-fx-border-color: ghostwhite;" />
+            <VBox id="vbox_info" prefHeight="50.0" prefWidth="200.0" style="-fx-border-color: ghostwhite; -fx-background-color: lightcyan;">
+               <children>
+                  <Text id="text_name" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: NULL" />
+                  <Text id="text_id" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: NULL" />
+                  <Text id="text_profile" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile: NULL" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </bottom>
+   <left>
+      <VBox id="vbox_friends" prefHeight="0.0" prefWidth="200.0"
+            style="-fx-border-color: ghostwhite; -fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox id="vbox_chat" prefHeight="680.0" prefWidth="1080.0" style="-fx-background-color: aliceblue; -fx-border-color: ghostwhite;" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
