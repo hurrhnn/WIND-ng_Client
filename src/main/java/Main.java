@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws URISyntaxException, IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
 
         File tokenFile = new File(".WINDToken");
         boolean isTokenSaved = tokenFile.exists();
@@ -36,7 +36,7 @@ public class Main {
             }
         }
 
-        WebSocketClient webSocketClient = new WINDWebSocketClient(new URI("ws://192.168.0.95:9000"), scanner, token);
+        WebSocketClient webSocketClient = new WINDWebSocketClient(new URI("ws://192.168.35.1:9000/ws"), scanner, token);
         webSocketClient.connect();
     }
 }
