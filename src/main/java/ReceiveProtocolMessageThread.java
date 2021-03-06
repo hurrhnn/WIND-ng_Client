@@ -1,9 +1,9 @@
 import client.Info;
 import client.UpdateClientUI;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -38,7 +38,6 @@ public class ReceiveProtocolMessageThread implements Runnable {
         while (true) {
             try {
                 JSONObject jsonObject = messageQueue.take();
-
                 String type = jsonObject.getString("type");
                 switch (type) {
                     case "handshake":
@@ -48,6 +47,7 @@ public class ReceiveProtocolMessageThread implements Runnable {
                                 BorderPane rootPane = FXMLLoader.load(getClass().getResource("root.fxml"));
                                 scene = new Scene(rootPane, 1280, 720);
                                 UpdateClientUI.globalStage.setScene(scene);
+                                ((ScrollPane) UpdateClientUI.globalStage.getScene().lookup("#scr_pane_chat")).setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -96,6 +96,7 @@ public class ReceiveProtocolMessageThread implements Runnable {
                                         textChat.setText(windWebSocketClient.windObjectGetter.getUserById(realId).getName() + ": " + windWebSocketClient.DMDatabase.get(user.getId()).get(i).getContent());
                                         textChat.setFont(new Font(Info.FONT_NAME.getValue(), 15));
                                         vBox_chat.getChildren().add(textChat);
+                                        ((ScrollPane) UpdateClientUI.globalStage.getScene().lookup("#scr_pane_chat")).setVvalue(1);
                                     }
                                 });
 
@@ -133,7 +134,10 @@ public class ReceiveProtocolMessageThread implements Runnable {
                             textChat.setFont(new Font(Info.FONT_NAME.getValue(), 15));
 
                             VBox vBox_chat = (VBox) UpdateClientUI.globalStage.getScene().lookup("#vbox_chat");
-                            Platform.runLater(() -> vBox_chat.getChildren().add(textChat));
+                            UpdateClientUI.onUpdate(() -> {
+                                vBox_chat.getChildren().add(textChat);
+                                ((ScrollPane) UpdateClientUI.globalStage.getScene().lookup("#scr_pane_chat")).setVvalue(1);
+                            });
                         }
                         break;
 
@@ -148,6 +152,5 @@ public class ReceiveProtocolMessageThread implements Runnable {
                 System.exit(1);
             }
         }
-
     }
 }

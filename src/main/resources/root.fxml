@@ -21,14 +21,13 @@
       </Pane>
    </bottom>
    <left>
-      <VBox id="vbox_friends" prefHeight="0.0" prefWidth="200.0"
-            style="-fx-border-color: ghostwhite; -fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+      <VBox id="vbox_friends" prefHeight="0.0" prefWidth="200.0" style="-fx-border-color: ghostwhite; -fx-background-color: lightblue;" BorderPane.alignment="CENTER">
       </VBox>
    </left>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane id="scr_pane_chat" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox id="vbox_chat" prefHeight="680.0" prefWidth="1080.0" style="-fx-background-color: aliceblue; -fx-border-color: ghostwhite;" />
+            <VBox id="vbox_chat" prefHeight="668.0" prefWidth="1080.0" style="-fx-background-color: aliceblue; -fx-border-color: ghostwhite;" />
          </content>
       </ScrollPane>
    </center>
