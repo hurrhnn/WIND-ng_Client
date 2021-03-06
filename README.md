@@ -2,6 +2,6 @@
 ### My first GUI project with JavaFX.
 
 ===functions===<br>
-A. Using token authentication method.<br>
-B. Send & Receive Direct Messages.
+A. Used token authentication method.<br>
+B. It can Send & Receive Direct Messages.
 
