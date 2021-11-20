@@ -6,6 +6,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
+import java.math.BigInteger;
 import java.net.URI;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -21,7 +22,7 @@ public class WINDWebSocketClient extends org.java_websocket.client.WebSocketClie
     private ArrayBlockingQueue<JSONObject> messageQueue;
     Thread sendProtocolMessageThread = null;
 
-    volatile public int currentVBox = 0;
+    volatile public BigInteger currentVBox = BigInteger.valueOf(0);
     volatile public boolean isReceiveFromMe = false;
 
     public WINDWebSocketClient(URI serverUri, Scanner scanner, String token) {
@@ -34,7 +35,7 @@ public class WINDWebSocketClient extends org.java_websocket.client.WebSocketClie
     public SelfUser selfUser;
     public List<User> userList = new ArrayList<>();
 
-    public Map<Integer, List<DMessage>> DMDatabase = new HashMap<>();
+    public Map<BigInteger, List<DMessage>> DMDatabase = new HashMap<>();
     WINDClientHelper windObjectGetter = new WINDClientHelper(this);
 
     @Override

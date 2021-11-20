@@ -36,7 +36,7 @@ public class Main {
             }
         }
 
-        WebSocketClient webSocketClient = new WINDWebSocketClient(new URI("ws://192.168.35.1:9000/ws"), scanner, token);
+        WebSocketClient webSocketClient = new WINDWebSocketClient(new URI("ws://192.168.35.2:9000/ws"), scanner, token);
         webSocketClient.connect();
     }
 }

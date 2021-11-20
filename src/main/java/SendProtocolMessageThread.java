@@ -28,7 +28,7 @@ public class SendProtocolMessageThread extends Thread {
                 try {
                     stringBuilder.replace(stringBuilder.length() - 1, stringBuilder.length(), "");
                     if (stringBuilder.substring(0, 4).equalsIgnoreCase("chat")) {
-                        int userId = Integer.parseInt(stringBuilder.substring(6).substring(0, stringBuilder.substring(6).indexOf(",")));
+                        long userId = Long.parseLong(stringBuilder.substring(6).substring(0, stringBuilder.substring(6).indexOf(",")));
                         String message = stringBuilder.substring(6).substring(stringBuilder.substring(6).indexOf(",") + 2).replace(";", "");
 
                         windWebSocketClient.send("{\n" +
@@ -46,7 +46,7 @@ public class SendProtocolMessageThread extends Thread {
         }).start();
 
         while (true) // Waiting until toolkit initializes.
-            if (windWebSocketClient.currentVBox != 0) break;
+            if (windWebSocketClient.currentVBox.toString().equals("0")) break;
 
         // GUI
         TextArea textArea = (TextArea) UpdateClientUI.globalStage.getScene().lookup("#textarea_input_text");
@@ -56,7 +56,7 @@ public class SendProtocolMessageThread extends Thread {
                         "    \"type\": \"chat\",\n" +
                         "    \"payload\": {\n" +
                         "        \"type\": \"send\",\n" +
-                        "        \"chat_id\": " + windWebSocketClient.currentVBox + ",\n" +
+                        "        \"chat_id\": " + windWebSocketClient.currentVBox.toString() + ",\n" +
                         "    }\n" +
                         "}";
                 JSONObject jsonObject = new JSONObject(rawPayload);

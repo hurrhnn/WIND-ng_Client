@@ -2,6 +2,8 @@ package objects.data;
 
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+
 public class SelfUser extends User{
 
     public SelfUser(JSONObject jsonUserObject) {
@@ -16,7 +18,7 @@ public class SelfUser extends User{
         return super.getName();
     }
 
-    public int getId() {
+    public BigInteger getId() {
         return super.getId();
     }
 
