@@ -16,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -94,7 +93,7 @@ public class ReceiveProtocolMessageThread implements Runnable {
                                     for (int i = 0; i < windWebSocketClient.DMDatabase.get(user.getId()).size(); i++) {
                                         Text textChat = new Text();
                                         DMessage dMessage = windWebSocketClient.DMDatabase.get(user.getId()).get(i);
-                                        BigInteger realId = dMessage.getUserId() == dMessage.getChatId() ? BigInteger.valueOf(dMessage.getChatId()) : BigInteger.valueOf(dMessage.getUserId());
+                                        BigInteger realId = dMessage.getUserId().toString().equals(dMessage.getChatId().toString()) ? new BigInteger(dMessage.getChatId().toString()) : new BigInteger(dMessage.getUserId().toString());
                                         textChat.setText(windWebSocketClient.windObjectGetter.getUserById(realId).getName() + ": " + windWebSocketClient.DMDatabase.get(user.getId()).get(i).getContent());
                                         textChat.setFont(new Font(Info.FONT_NAME.getValue(), 15));
                                         vBox_chat.getChildren().add(textChat);
@@ -115,9 +114,9 @@ public class ReceiveProtocolMessageThread implements Runnable {
 
                     case "chat":
                         DMessage dMessage = new DMessage(jsonObject.getJSONObject("payload"));
-                        BigInteger realId = dMessage.getUserId() == dMessage.getChatId() ? BigInteger.valueOf(dMessage.getUserId()) : BigInteger.valueOf(dMessage.getUserId());
+                        BigInteger realId = dMessage.getUserId().toString().equals(dMessage.getChatId().toString()) ? new BigInteger(dMessage.getUserId().toString()) : new BigInteger(dMessage.getUserId().toString());
 
-                        if (realId == windWebSocketClient.selfUser.getId()) {
+                        if (realId.toString().equals(windWebSocketClient.selfUser.getId().toString())) {
                             if (!windWebSocketClient.isReceiveFromMe) {
                                 windWebSocketClient.isReceiveFromMe = true;
                             } else {
@@ -130,9 +129,9 @@ public class ReceiveProtocolMessageThread implements Runnable {
                         afterDMList.add(dMessage);
                         windWebSocketClient.DMDatabase.replace(realId, beforeDMList, afterDMList);
 
-                        if (windWebSocketClient.currentVBox == realId) {
+                        if (windWebSocketClient.currentVBox.toString().equals(realId.toString())) {
                             Text textChat = new Text();
-                            textChat.setText(windWebSocketClient.windObjectGetter.getUserById(BigInteger.valueOf(dMessage.getUserId())).getName() + ": " + dMessage.getContent());
+                            textChat.setText(windWebSocketClient.windObjectGetter.getUserById(new BigInteger(dMessage.getUserId().toString())).getName() + ": " + dMessage.getContent());
                             textChat.setFont(new Font(Info.FONT_NAME.getValue(), 15));
 
                             VBox vBox_chat = (VBox) UpdateClientUI.globalStage.getScene().lookup("#vbox_chat");
